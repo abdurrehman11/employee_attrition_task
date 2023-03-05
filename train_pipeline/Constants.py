@@ -3,6 +3,8 @@ from enum import Enum
 class Constants(Enum):
     CONFIGS = 'configs'
     CONFIG_FILE = 'CONFIG_FILE'
+    BRANCH_TAG = 'BRANCH_TAG'
+    DEFAULT_BRANCH_TAG = 'LOCAL'
     DEFAULT_CONFIG_FILE = 'config_dev.yaml'
 
     DATASET_PATH = 'dataset_path'
