@@ -17,6 +17,8 @@ docker-compose -f docker-compose.train.feature.yaml up
 CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.train.yaml up
 CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.1 docker-compose -f docker-compose.train.yaml up
 
+CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-compose.train.yaml up
+
 # to build image whenever you run docker-compose up
 docker-compose up --build
 
