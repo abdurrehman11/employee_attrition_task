@@ -15,3 +15,4 @@ services:
     environment:
       CONFIG_FILE: ${CONFIG_FILE}
       BRANCH_TAG: ${BRANCH_TAG}
+      
