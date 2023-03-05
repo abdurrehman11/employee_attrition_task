@@ -12,4 +12,6 @@ target_encoder_path: /data/target_encoder.joblib
 target_col: Attrition
 model_name: random_forest
 experiment_name: random_forest_training
-run_name: V1
+run_name: V2
+mlflow_tracking_uri: file:///mlflow_runs
+mlflow_metric_order: DESC
