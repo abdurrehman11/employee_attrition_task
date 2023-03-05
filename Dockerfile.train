@@ -1,0 +1,16 @@
+FROM python:3.8-slim-buster
+
+# Set working directory
+WORKDIR /
+
+COPY train_pipeline/requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY train_pipeline/entrypoint.sh .
+RUN chmod +x /entrypoint.sh
+
+# RUN python test_train.py
+EXPOSE 5000
+
+# Run training pipeline
+ENTRYPOINT ["/entrypoint.sh"]
