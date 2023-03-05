@@ -6,13 +6,6 @@ WORKDIR /train_pipeline
 COPY train_pipeline/requirements.txt .
 RUN pip install -r requirements.txt
 
-# Create a named volume for sharing data
-# VOLUME /train_pipeline/data
-# VOLUME /train_pipeline/configs 
-
-# COPY train_pipeline ./
-# COPY config.py ./
-
 # RUN python test_train.py
 EXPOSE 5000
 
