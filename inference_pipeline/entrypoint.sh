@@ -6,9 +6,9 @@ cd employee_attrition_task/inference_pipeline &&
 git fetch --tags &&
 
 # Check if BRANCH_TAG environment variable is set to DEV
-if [ "$BRANCH_TAG" == "DEV" ]; then
-    echo "checkout the dev branch"
-    git checkout dev
+if [ "$BRANCH_TAG" == "dev" ]; then
+    echo "checkout the $BRANCH_TAG branch"
+    git checkout $BRANCH_TAG
 else
     echo "Checkout the tag: $BRANCH_TAG" 
     git checkout $BRANCH_TAG
