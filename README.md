@@ -40,10 +40,10 @@ docker run -p 8080:8080 -e CONFIG_FILE=config_dev.yaml -v ${PWD}/inference_pipel
 -------------------------------------------------------------------------
 docker-compose -f docker-compose.infer.feature.yaml up
 
-CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.train.yaml up
-CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.3 docker-compose -f docker-compose.train.yaml up
+CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.infer.yaml up
+CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.3 docker-compose -f docker-compose.infer.yaml up
 
-CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-compose.train.yaml up
+CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-compose.infer.yaml up
 
 -------------------------------------------------------------------
 
