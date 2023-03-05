@@ -15,5 +15,5 @@ model_name: random_forest
 train_split_ratio: 0.8
 experiment_name: random_forest_training
 experiment_id: RF_EXP_1
-run_name: V4
+run_name: V1
 mlflow_tracking_uri: file:///mlflow_runs

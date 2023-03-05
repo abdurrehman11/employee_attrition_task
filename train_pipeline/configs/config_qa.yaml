@@ -7,11 +7,13 @@ categorical_cols:
   - MaritalStatus
   - Over18
   - OverTime
-dataset_path: /train_pipeline/data/employee-attrition.csv
-ohe_encoder_path: /train_pipeline/data/ohe_encoder.joblib
-target_encoder_path: /train_pipeline/data/target_encoder.joblib
+dataset_path: /data/employee-attrition.csv
+ohe_encoder_path: /data/ohe_encoder.joblib
+target_encoder_path: /data/target_encoder.joblib
 target_col: Attrition
 model_name: random_forest
 train_split_ratio: 0.8
 experiment_name: random_forest_training
-run_name: V1
+experiment_id: RF_EXP_1
+run_name: V4
+mlflow_tracking_uri: file:///mlflow_runs
