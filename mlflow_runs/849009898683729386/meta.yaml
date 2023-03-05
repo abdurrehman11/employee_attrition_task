@@ -1,0 +1,6 @@
+artifact_location: file:///mlflow_runs/849009898683729386
+creation_time: 1678013864472
+experiment_id: '849009898683729386'
+last_update_time: 1678013864472
+lifecycle_stage: active
+name: random_forest_training

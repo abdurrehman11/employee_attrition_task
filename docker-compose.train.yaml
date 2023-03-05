@@ -1,0 +1,18 @@
+version: '3'
+services:
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    image: attrition_train_image:${BRANCH_TAG}
+    container_name: attrition_train_stage:${BRANCH_TAG}
+    ports:
+      - '5000:5000'
+    volumes:
+      - ${PWD}/train_pipeline:/train_pipeline
+      - ${PWD}/data:/data
+      - ${PWD}/mlflow_runs:/mlflow_runs
+    environment:
+      CONFIG_FILE: ${CONFIG_FILE}
+      BRANCH_TAG: ${BRANCH_TAG}
+      
