@@ -12,7 +12,9 @@ docker run -p 5000:5000 -e CONFIG_FILE=config_dev.yaml -v ${PWD}/train_pipeline:
 docker run -p 5000:5000  -e CONFIG_FILE=config_dev.yaml -v ${PWD}/train_pipeline:/train_pipeline -v ${PWD}/data:/data -v ${PWD}/mlflow_runs:/mlflow_runs attrition_train_image
 
 # run docker-compose by specifying file name
-docker-compose -f docker-compose.feature.yaml up
+docker-compose -f docker-compose.train.feature.yaml up
+
+docker-compose -e CONFIG_FILE=config_dev.yaml -e BRANCH_TAG=dev -f docker-compose.train.yaml up
 
 # to build image whenever you run docker-compose up
 docker-compose up --build
