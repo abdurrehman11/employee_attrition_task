@@ -1,0 +1,16 @@
+version: '3'
+services:
+  infer:
+    build:
+      context: .
+      dockerfile: Dockerfile.infer.feature
+    image: attrition_infer_image
+    container_name: attrition_infer
+    ports:
+      - '8080:8080'
+    volumes:
+      - ${PWD}/inference_pipeline:/inference_pipeline
+      - ${PWD}/data:/data
+      - ${PWD}/mlflow_runs:/mlflow_runs
+    environment:
+      CONFIG_FILE: config_dev.yaml
