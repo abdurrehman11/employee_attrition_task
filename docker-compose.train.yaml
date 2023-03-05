@@ -4,8 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.train
-    image: attrition_train_image:${BRANCH_TAG}
-    container_name: attrition_train_stage:${BRANCH_TAG}
+    image: attrition_train_image:stage
+    container_name: attrition_train_stage_${BRANCH_TAG}
     ports:
       - '5000:5000'
     volumes:
@@ -15,4 +15,3 @@ services:
     environment:
       CONFIG_FILE: ${CONFIG_FILE}
       BRANCH_TAG: ${BRANCH_TAG}
-      
