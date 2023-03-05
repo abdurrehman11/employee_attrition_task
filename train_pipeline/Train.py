@@ -27,11 +27,12 @@ class Train:
         # Initialize MLflow
         mlflow.set_tracking_uri(self.config[Constants.MLFLOW_TRACKING_URI.value])
         mlflow.set_experiment(self.config[Constants.EXPERIMENT_NAME.value])
+
+        mlflow_run_name = (self.config[Constants.BRANCH_TAG.value] + "_" + 
+                           self.config[Constants.RUN_NAME.value])
         
         with mlflow.start_run(
-            run_name=self.config[Constants.RUN_NAME.value],
-            # run_id=self.config[Constants.RUN_NAME.value],
-            # experiment_id=self.config[Constants.EXPERIMENT_ID.value],
+            run_name=mlflow_run_name,
             description='Employee Attrition - Random Forest Experiment Tracking'
         ):
             self.model_params = self.model.get_params()
@@ -48,8 +49,7 @@ class Train:
             # mlflow.log_artifact(confusion_matrix_path, 'confusion_matrix')
             # mlflow.log_artifact(roc_auc_plot_path, "roc_auc_plot")
             
-            mlflow.set_tag("tag1", "Random Forest")
-            mlflow.set_tags({"tag2":"Randomized Search CV", "tag3":"Production"})
+            mlflow.set_tag(Constants.BRANCH_TAG.value, self.config[Constants.BRANCH_TAG.value])
                 
-        print(f'Run - {self.config[Constants.RUN_NAME.value]} is logged to Experiment - {self.config[Constants.EXPERIMENT_NAME.value]}')
+        print(f'Run - {mlflow_run_name} is logged to Experiment - {self.config[Constants.EXPERIMENT_NAME.value]}')
 

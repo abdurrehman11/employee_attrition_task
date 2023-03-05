@@ -9,11 +9,14 @@ from Train import Train
 
 class Driver:
     def __init__(self):
+        branch_tag = os.environ.get(Constants.BRANCH_TAG.value, Constants.DEFAULT_BRANCH_TAG.value)
         config_file = os.environ.get(Constants.CONFIG_FILE.value, Constants.DEFAULT_CONFIG_FILE.value)
         config_path = os.path.abspath(os.path.join( Constants.CONFIGS.value, config_file))
         
         with open(config_path) as f:
             self.config = yaml.safe_load(f)
+
+        self.config.update({Constants.BRANCH_TAG.value: branch_tag})
 
 
 if __name__ == '__main__':
