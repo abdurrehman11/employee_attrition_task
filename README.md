@@ -15,6 +15,7 @@ docker run -p 5000:5000  -e CONFIG_FILE=config_dev.yaml -v ${PWD}/train_pipeline
 docker-compose -f docker-compose.train.feature.yaml up
 
 CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.train.yaml up
+CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.1 docker-compose -f docker-compose.train.yaml up
 
 # to build image whenever you run docker-compose up
 docker-compose up --build

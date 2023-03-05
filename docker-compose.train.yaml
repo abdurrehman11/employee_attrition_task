@@ -9,7 +9,6 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - ${PWD}/train_pipeline:/train_pipeline
       - ${PWD}/data:/data
       - ${PWD}/mlflow_runs:/mlflow_runs
     environment:
