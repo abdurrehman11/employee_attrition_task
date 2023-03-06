@@ -11,6 +11,7 @@ services:
     volumes:
       - ${PWD}/train_pipeline:/train_pipeline
       - ${PWD}/data:/data
+      - ${PWD}/logs:/logs
       - ${PWD}/mlflow_runs:/mlflow_runs
     environment:
       CONFIG_FILE: config_dev.yaml
