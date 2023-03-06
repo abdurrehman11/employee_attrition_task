@@ -6,11 +6,14 @@ from Constants import Constants
 
 
 class EmployeeAttritionDataset:
-    def __init__(self, config):
+    def __init__(self, config, logger):
         self.config = config
+        self.logger = logger
 
     def load_dataset(self):
+        self.logger.info(f"Going to load dataset from {self.config[Constants.DATASET_PATH.value]}")
         self.data = pd.read_csv(self.config[Constants.DATASET_PATH.value])
+        self.logger.info(f"Dataset loaded successfully with shape: {self.data.shape}")
 
     def preprocess(self):
         # Create an instance of the CategoricalEncoder class
@@ -26,8 +29,7 @@ class EmployeeAttritionDataset:
 
         # Fit and transform the data using the encoder
         encoded_data = self.encoder.fit_transform(self.data)
-        print(encoded_data.shape)
-        print(encoded_data.head())
+        self.logger.info(f"Dataset shape after preprocessing: {encoded_data.shape}")
 
         # Split the data with stratification
         self.splitter = DataSplitter(
@@ -38,8 +40,8 @@ class EmployeeAttritionDataset:
         )
 
         X_train, y_train, X_test, y_test = self.splitter.split(encoded_data, self.config[Constants.TARGET_COL.value])
-        print(f"Splitted dataset into train and test with shapes, "
-              f"X_train: {X_train.shape}, y_train: {y_train.shape}, X_test: {X_test.shape}, y_test: {y_test.shape}")
+        self.logger.info(f"Splitted dataset into train and test with shapes, "
+                         f"X_train: {X_train.shape}, y_train: {y_train.shape}, X_test: {X_test.shape}, y_test: {y_test.shape}")
         
         train_test_splits = [X_train, y_train, X_test, y_test]
         
