@@ -1,54 +1,66 @@
-# employee_attrition_task
+# Employee_Attrition_Task
 
-docker build -t attrition_train_image -f Dockerfile.train.feature .
+## Prerequisites
+Before running/cloning the code, make sure you have the following installed on your system:
+- Operating System: Windows WSL/ Ubuntu
+- Tools: Docker, Git
 
-# Run only train
-docker run -e CONFIG_FILE=config_dev.yaml -v ${PWD}/train_pipeline:/train_pipeline -v ${PWD}/data:/data attrition_train_image
+## Installation
+To install the code, follow these steps:
+- Clone the repository on your local machine using this command: 
+  - git clone https://github.com/abdurrehman11/employee_attrition_task.git
+- Open a command prompt or terminal window and navigate to the directory(`employee_attrition_task`) where the code is located.
+- create a folder `mlflow_runs` in project directory to track mlflow runs.
 
-# to run MLFlow 
-docker run -p 5000:5000 -e CONFIG_FILE=config_dev.yaml -v ${PWD}/train_pipeline:/train_pipeline -v ${PWD}/data:/data attrition_train_image
+## Git Branching Structure
 
-# run MLFlow with host artifact directory
-docker run -p 5000:5000  -e CONFIG_FILE=config_dev.yaml -v ${PWD}/train_pipeline:/train_pipeline -v ${PWD}/data:/data -v ${PWD}/mlflow_runs:/mlflow_runs attrition_train_image
+<img width="569" alt="image" src="https://user-images.githubusercontent.com/24878579/223056933-a97c9934-d5f7-4579-b78a-ebc91a0c3884.png">
 
+We will be following almost the above shown branching structure to manage code versioning and development collaboration.
 
----------------------------------------------------------------------
-# run docker-compose by specifying file name
-docker-compose -f docker-compose.train.feature.yaml up
+## Code Overview
+-	`data` --> this is a shared directory between train and inference pipeline and contains dataset and encoders that will be saved via train pipeline and used by inference pipeline.
+- `mlflow` --> this directory is used to share mlflow runs/models between train and inference pipeline (we need to create after code on local machine)
+- `train_pipeline` --> this directory contains the train pipeline code modules like DataSet, Train, Evaluation class etc.
+- `inference_pipeline` --> this directory contains the inference pipeline code module and API endpoint.
+- `Dockerfile.train.feature` and `Dockerfile.infer.feature` are used to build local images and test local development of pipelines and `docker-compose.train.feature` and `docker-compose.infer.feature` are used to run the images locally. 
+- `Dockerfile.train` and `Dockerfile.infer` are used to build images for `dev, qa and prod env` and `docker-compose.train` and `docker-compose.infer` are used to run the train and infer images on any env using env specific env variables. 
 
-CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.train.yaml up
-CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.1 docker-compose -f docker-compose.train.yaml up
+## How to Run/Test/Deploy
 
-CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-compose.train.yaml up
+### Train Pipeline
+- To run the train_pipeline on local machine, run the following command,
+  - `docker-compose -f docker-compose.train.feature.yaml up`
 
-# to build image whenever you run docker-compose up
-docker-compose up --build
+- To run the train_pipeline on dev env, run the following command,
+  - `CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.train.yaml up`
 
---------------------------------------------------------------------------
-docker run -p 5000:5000 -e CONFIG_FILE=config_dev.yaml -v ${PWD}/train_pipeline:/train_pipeline -v ${PWD}/data:/data emp_train_image
+- To run the train_pipeline on uat env, run the following command,
+  - `CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.1 docker-compose -f docker-compose.train.yaml up`
+  - You can pass `BRANCH_TAG` of current release that you want to test on qa.
 
-docker run -it -v ${PWD}/train_pipeline:/train_pipeline -v ${PWD}/data:/data emp_train_image /bin/bash
+- To run the train_pipeline on prod env, run the following command,
+  - `CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-compose.train.yaml up`
+  - You can pass `BRANCH_TAG` of current release that you want to deploy on prod.
 
-docker run -p 5000:5000 -v ${PWD}/train_pipeline:/train_pipeline -v ${PWD}/data:/train_pipeline/data -v ${PWD}/configs:/train_pipeline/configs emp_train_image
+### Inference Pipeline
+- To run the inference_pipeline on local machine, run the following command,
+  - `docker-compose -f docker-compose.infer.feature.yaml up`
 
+- To run the inference_pipeline on dev env, run the following command,
+  - `CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.infer.yaml up`
 
+- To run the inference_pipeline on uat env, run the following command,
+  - `CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.3 docker-compose -f docker-compose.infer.yaml up`
+  - You can pass `BRANCH_TAG` of current release that you want to test on qa.
 
-----------------------------------------------------------------------
+- To run the inference_pipeline on prod env, run the following command,
+  - `CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-compose.infer.yaml up`
+  - You can pass `BRANCH_TAG` of current release that you want to deploy on prod.
 
-docker build -t emp_infer_image -f Dockerfile.infer .
+- To test the `API endpoint` locally, enter this `URL: http://localhost:8080/docs` in your browser & copy/paste below request object in Request Body of `POST/predict` endpoint and hit Execute.
 
-docker run -p 8080:8080 -e CONFIG_FILE=config_dev.yaml -v ${PWD}/inference_pipeline:/inference_pipeline -v ${PWD}/data:/data -v ${PWD}/mlflow_runs:/mlflow_runs emp_infer_image
-
--------------------------------------------------------------------------
-docker-compose -f docker-compose.infer.feature.yaml up
-
-CONFIG_FILE=config_dev.yaml BRANCH_TAG=dev docker-compose -f docker-compose.infer.yaml up
-CONFIG_FILE=config_qa.yaml BRANCH_TAG=REL_UAT_V1.3 docker-compose -f docker-compose.infer.yaml up
-
-CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-compose.infer.yaml up
-
--------------------------------------------------------------------
-
+```
 {
   "Age": 41,		
   "BusinessTravel": "Travel_Rarely",
@@ -85,3 +97,4 @@ CONFIG_FILE=config_prod.yaml BRANCH_TAG=REL_PROD_V1.1 docker-compose -f docker-c
   "YearsSinceLastPromotion": 0,	
   "YearsWithCurrManager": 5
 }
+```
