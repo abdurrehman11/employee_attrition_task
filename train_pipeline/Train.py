@@ -6,25 +6,26 @@ from Constants import Constants
 
 
 class Train:
-    def __init__(self, config, train_test_splits):
+    def __init__(self, config, logger, train_test_splits):
         self.config = config
+        self.logger = logger
         self.models = Models()
         self.X_train, self.y_train, self.X_test, self.y_test = train_test_splits
 
     def train_model(self):
         self.model = self.models.get_model(self.config[Constants.MODEL_NAME.value])
-        print(f"========= Going to start {self.config[Constants.MODEL_NAME.value]} model training... ========")
+        self.logger.info(f"Going to start {self.config[Constants.MODEL_NAME.value]} model training...")
         self.model.fit(self.X_train, self.y_train)
-        print("============ Model training completed! ===============")
+        self.logger.info("Model training completed!")
 
     def evaluate_model(self):
         self.y_pred_prob = self.model.predict_proba(self.X_test)[:, 1]
         evaluate = Evaluate(self.y_test, self.y_pred_prob)
         self.eval_metrics = evaluate.get_evaluation_metrics()
-        print(f"Model Evaluation Metrics: {self.eval_metrics}")
+        self.logger.info(f"Model Evaluation Metrics: {self.eval_metrics}")
 
     def create_experiment(self):
-        # Initialize MLflow
+        self.logger.info("Initialized MLflow Experiment Tracking")
         mlflow.set_tracking_uri(self.config[Constants.MLFLOW_TRACKING_URI.value])
         mlflow.set_experiment(self.config[Constants.EXPERIMENT_NAME.value])
 
@@ -51,5 +52,5 @@ class Train:
             
             mlflow.set_tag(Constants.BRANCH_TAG.value, self.config[Constants.BRANCH_TAG.value])
                 
-        print(f'Run - {mlflow_run_name} is logged to Experiment - {self.config[Constants.EXPERIMENT_NAME.value]}')
+        self.logger.info(f'Run - {mlflow_run_name} is logged to Experiment - {self.config[Constants.EXPERIMENT_NAME.value]}')
 

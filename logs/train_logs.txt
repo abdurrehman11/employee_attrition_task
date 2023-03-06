@@ -1,0 +1,11 @@
+2023-03-06 14:47:07,648 - train_logger - INFO - Driver.py:run_pipeline - Train Pipeline execution Started
+2023-03-06 14:47:07,648 - train_logger - INFO - EmployeeAttritionDataset.py:load_dataset - Going to load dataset from /data/employee-attrition.csv
+2023-03-06 14:47:07,664 - train_logger - INFO - EmployeeAttritionDataset.py:load_dataset - Dataset loaded successfully with shape: (1470, 35)
+2023-03-06 14:47:07,675 - train_logger - INFO - EmployeeAttritionDataset.py:preprocess - Dataset shape after preprocessing: (1470, 56)
+2023-03-06 14:47:07,678 - train_logger - INFO - EmployeeAttritionDataset.py:preprocess - Splitted dataset into train and test with shapes, X_train: (1176, 55), y_train: (1176,), X_test: (294, 55), y_test: (294,)
+2023-03-06 14:47:07,679 - train_logger - INFO - Train.py:train_model - Going to start random_forest model training...
+2023-03-06 14:47:07,877 - train_logger - INFO - Train.py:train_model - Model training completed!
+2023-03-06 14:47:07,892 - train_logger - INFO - Train.py:evaluate_model - Model Evaluation Metrics: {'accuracy': 0.8367346938775511, 'precision': 0.4666666666666667, 'recall': 0.14893617021276595, 'f1': 0.22580645161290325, 'roc_auc': 0.798819881126712}
+2023-03-06 14:47:07,892 - train_logger - INFO - Train.py:create_experiment - Initialized MLflow Experiment Tracking
+2023-03-06 14:47:09,790 - train_logger - INFO - Train.py:create_experiment - Run - LOCAL_V5 is logged to Experiment - random_forest_training
+2023-03-06 14:47:09,791 - train_logger - INFO - Driver.py:run_pipeline - Train Pipeline execution Completed!

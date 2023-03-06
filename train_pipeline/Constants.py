@@ -20,3 +20,7 @@ class Constants(Enum):
     EXPERIMENT_ID = 'experiment_id'
     RUN_NAME = 'run_name'
     MLFLOW_TRACKING_URI = 'mlflow_tracking_uri'
+
+    LOGGER_NAME = 'train_logger'
+    LOG_DIR = 'logs'
+    LOG_FILE = 'train_logs.txt'
