@@ -20,6 +20,7 @@ We will be following almost the above shown branching structure to manage code v
 
 ## Code Overview
 -	`data` --> this is a shared directory between train and inference pipeline and contains dataset and encoders that will be saved via train pipeline and used by inference pipeline.
+-	`logs` --> this is a shared directory between train and inference pipeline logs and but currently have only train pipeline logs.
 - `mlflow` --> this directory is used to share mlflow runs/models between train and inference pipeline (we need to create after code on local machine)
 - `train_pipeline` --> this directory contains the train pipeline code modules like DataSet, Train, Evaluation class etc.
 - `inference_pipeline` --> this directory contains the inference pipeline code module and API endpoint.
@@ -98,3 +99,10 @@ We will be following almost the above shown branching structure to manage code v
   "YearsWithCurrManager": 5
 }
 ```
+
+## Next Steps
+- Set up logging for inference pipeline
+- Exception handling for both train and inference pipeline
+- Unit testing for both train and inference pipeline
+- Cloud Infrastructure setup for project i.e. if we go for AWS, we can use AWS EC2 to deploy containers, setup MlFlow server, AWS S3 for datasets, models and other artifacts
+- Post production monitoring of datasets, models and pipelines and take actions accordingly. e.g. retrain model based on model performance drift and data drift
