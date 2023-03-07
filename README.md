@@ -106,3 +106,6 @@ We will be following almost the above shown branching structure to manage code v
 - Unit testing for both train and inference pipeline
 - Cloud Infrastructure setup for project i.e. if we go for AWS, we can use AWS EC2 to deploy containers, setup MlFlow server, AWS S3 for datasets, models and other artifacts
 - Post production monitoring of datasets, models and pipelines and take actions accordingly. e.g. retrain model based on model performance drift and data drift
+
+## References
+- https://towardsdatascience.com/how-to-structure-your-git-branching-strategy-by-a-data-engineer-45ff96857bb (Git Branching)
